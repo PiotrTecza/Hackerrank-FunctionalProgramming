@@ -1,1 +1,1 @@
-# Hackerrank-FunctionalStructures
+# Hackerrank-FunctionalProgramming
