@@ -17,18 +17,17 @@ type Node(x: int) =
         this.Left <- this.Right
         this.Right <- temp
 
-let BuildTree inputList:int*int = 
+let BuildTree inputList= 
     let root = new Node(1)
     let mutable nodeList = [root]
 
     match inputList with
     | (l,r) -> 
-        if l <> -1 then
+        if l <> -1 then 
             let left = new Node(l)
             nodeList.Head.Left <- left
-            nodeList <- nodeList
+            nodeList <- nodeList.Tail @ [left]
         if r <> -1 then 
             let right = new Node(r)
             nodeList.Head.Right <- right
-
-        nodeList <- nodeList.Tail
+            nodeList <- nodeList.Tail @ [right]
