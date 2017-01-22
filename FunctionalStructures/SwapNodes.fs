@@ -18,6 +18,13 @@ type Node(x: int) =
         this.Left <- this.Right
         this.Right <- temp
 
+    member this.InorderTraverse() = 
+        if not (isNull left) then
+            left.InorderTraverse()
+        printf "%d " value
+        if not (isNull right) then
+            right.InorderTraverse()
+
 let BuildTree inputList= 
     let root = new Node(1)
     let nodeList = new List<Node>()
@@ -39,5 +46,3 @@ let BuildTree inputList=
             index <- index + 1
             nodeList.RemoveAt(0)
     root 
-
-
