@@ -13,10 +13,14 @@ type Node(x: int) =
                       and set newValue = right <- newValue
     member this.Value = value
 
-    member this.Swap() =
-        let temp = left
-        this.Left <- this.Right
-        this.Right <- temp
+    member this.Swap depth =
+        if depth = 1 then
+            let temp = left
+            this.Left <- this.Right
+            this.Right <- temp
+        else
+            if not (isNull left) then left.Swap (depth - 1)
+            if not (isNull right) then right.Swap (depth - 1)
 
     member this.InorderTraverse() = 
         if not (isNull left) then
@@ -46,3 +50,6 @@ let BuildTree inputList=
             index <- index + 1
             nodeList.RemoveAt(0)
     root 
+
+let root = BuildTree [2; 3;-1; 4;-1; 5;-1; -1;-1; -1]
+root.InorderTraverse()
