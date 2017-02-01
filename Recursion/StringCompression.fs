@@ -1,32 +1,23 @@
 module StringCompression
 open System
 
-let compress str = 
-    let mutable previousChar = '\000'
+let compress (str:string) = 
+    let mutable previousChar = str.[0]
     let mutable counter = 0
-    let mutable result = ""
 
     for c in str do
         if c = previousChar then
             counter <- counter + 1
         else
-            result <- result + previousChar.ToString()
+            printf "%c" previousChar
             if counter > 1 then 
-                result <- result + counter.ToString()
+                printf "%i" counter
             previousChar <- c
             counter <- 1
 
-    result <- result + previousChar.ToString()
+    printf "%c" previousChar
     if counter > 1 then 
-        result <- result + counter.ToString()
+        printf "%i" counter
+    |> ignore
 
-    result
-
-let Run() = 
-    let input = Console.ReadLine() |> string
-    let result = compress input
-    printf "%s" result
-
-Run()
-
-
+Console.ReadLine() |> string |> compress
