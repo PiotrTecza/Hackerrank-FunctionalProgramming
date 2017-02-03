@@ -1,23 +1,18 @@
-module StringCompression
-open System
+let builder = System.Text.StringBuilder()
 
-let compress (str:string) = 
-    let mutable previousChar = str.[0]
-    let mutable counter = 0
+let groupChars xs = 
+    Seq.foldBack (fun x acc -> 
+            match acc, x with
+            | [], _ -> [(x,1)]
+            | (c,n) :: rest, x when c = x -> (c, n+1) :: rest
+            | acc, x -> (x,1) :: acc) xs []
 
-    for c in str do
-        if c = previousChar then
-            counter <- counter + 1
-        else
-            printf "%c" previousChar
-            if counter > 1 then 
-                printf "%i" counter
-            previousChar <- c
-            counter <- 1
+let concatGrupus groups = 
+    List.iter (fun g ->
+        match g with
+        | (c,1) -> builder.AppendFormat(("{0}",c)
+        | (c,n) -> builder.AppendFormat("{0}{1}",c,n)
+        |> ignore) groups
+    builder.ToString()
 
-    printf "%c" previousChar
-    if counter > 1 then 
-        printf "%i" counter
-    |> ignore
-
-Console.ReadLine() |> string |> compress
+"abaabb" |> groupChars |> concatGrupus
