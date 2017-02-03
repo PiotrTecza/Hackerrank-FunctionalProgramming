@@ -10,7 +10,7 @@ let groupChars xs =
             | (c,n) :: rest, x when c = x -> (c, n+1) :: rest
             | acc, x -> (x,1) :: acc) xs []
 
-let concatGrupus groups = 
+let concatGroupus groups = 
     List.iter (fun g ->
         match g with
         | (c:char,1) -> builder.AppendFormat("{0}",c)
@@ -18,4 +18,4 @@ let concatGrupus groups =
         |> ignore) groups
     builder.ToString()
 
-Console.ReadLine() |> groupChars |> concatGrupus |> printfn "%s"
+Console.ReadLine() |> groupChars |> concatGroupus |> printfn "%s"
