@@ -1,4 +1,7 @@
-let builder = System.Text.StringBuilder()
+module StringCompression
+open System
+
+let builder = Text.StringBuilder()
 
 let groupChars xs = 
     Seq.foldBack (fun x acc -> 
@@ -10,9 +13,9 @@ let groupChars xs =
 let concatGrupus groups = 
     List.iter (fun g ->
         match g with
-        | (c,1) -> builder.AppendFormat(("{0}",c)
+        | (c:char,1) -> builder.AppendFormat("{0}",c)
         | (c,n) -> builder.AppendFormat("{0}{1}",c,n)
         |> ignore) groups
     builder.ToString()
 
-"abaabb" |> groupChars |> concatGrupus
+Console.ReadLine() |> groupChars |> concatGrupus |> printfn "%s"
